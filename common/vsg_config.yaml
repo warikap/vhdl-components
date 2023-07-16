@@ -1,0 +1,15 @@
+rule:
+  global:
+    indentSize: 4
+  constant_004:
+    case: 'upper'
+  type_500:
+    case: 'upper'
+  process_017:
+    case: 'upper'
+  process_019:
+    case: 'upper'
+  case_200:
+    style: no_blank_line
+  generic_007:
+    case: 'upper'
