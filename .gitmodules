@@ -1,0 +1,3 @@
+[submodule "simlib/UVVM_Light"]
+	path = simlib/UVVM_Light
+	url = https://github.com/warikap/UVVM_Light.git
