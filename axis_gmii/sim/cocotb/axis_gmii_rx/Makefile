@@ -18,37 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-TOPLEVEL_LANG = vhdl
-
-SIM ?= ghdl
-WAVES ?= 1
-
-COCOTB_HDL_TIMEUNIT = 1ns
-COCOTB_HDL_TIMEPRECISION = 1ps
-
 DUT      = axis_gmii_rx
 TOPLEVEL = $(DUT)
 MODULE   = $(DUT)_tb
 VHDL_SOURCES += ../../../src/$(DUT).vhd
 SIM_BUILD = work
 
-ifeq ($(SIM), questa)
-
-#VHDL_GPI_INTERFACE = vhpi
-COMPILE_ARGS += -2008
-
-else ifeq ($(SIM), ghdl)
-
-COMPILE_ARGS += --std=08
-GHDL_ARGS += --std=08
-SIM_ARGS += --wave=${MODULE}.ghw
-
-endif
-
-include $(shell cocotb-config --makefiles)/Makefile.sim
-
-clean::
-	rm -rf __pycache__
+include ../../../../common/cocotb.mk
 
 STYLE_FILES = $(VHDL_SOURCES)
 include ../../../../common/style.mk
