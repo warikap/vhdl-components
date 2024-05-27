@@ -21,9 +21,9 @@
 DUT      = axis_gmii
 TOPLEVEL = $(DUT)
 MODULE   = $(DUT)_tb
-VHDL_SOURCES += ../../../src/$(DUT).vhd
-VHDL_SOURCES += ../../../src/$(DUT)_rx.vhd
-VHDL_SOURCES += ../../../src/$(DUT)_tx.vhd
+VHDL_SOURCES += ../../../../hdl/$(DUT)/$(DUT).vhd
+VHDL_SOURCES += ../../../../hdl/$(DUT)/$(DUT)_rx.vhd
+VHDL_SOURCES += ../../../../hdl/$(DUT)/$(DUT)_tx.vhd
 SIM_BUILD = work
 
 include ../../../../common/cocotb.mk

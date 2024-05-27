@@ -90,7 +90,8 @@ architecture rtl of axis_gmii_rx is
     procedure crc_step (
         signal crcIn  : in std_logic_vector(31 downto 0);
         signal data   : in std_logic_vector(7 downto 0);
-        signal crcOut : out std_logic_vector(31 downto 0)) is
+        signal crcOut : out std_logic_vector(31 downto 0)
+    ) is
     begin
         -- vsg_off
         crcOut(0)  <= crcIn(2) xor crcIn(8) xor data(2);
