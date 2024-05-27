@@ -34,10 +34,10 @@ endif
 
 all: vivado
 
-vivado: $(FPGA_PROJECT).xpr
-	vivado $(FPGA_PROJECT).xpr
+vivado: $(FPGA_PROJECT)/$(FPGA_PROJECT).xpr
+	vivado -nojournal -nolog $<
 
-$(FPGA_PROJECT).xpr: Makefile
+$(FPGA_PROJECT)/$(FPGA_PROJECT).xpr: Makefile
 	echo "create_project -force -part $(FPGA_PART) $@" > create_project.tcl
 	echo "set_property target_language VHDL [current_project]" >> create_project.tcl
 	for x in $(SRC_FILES); do \
@@ -58,7 +58,7 @@ $(FPGA_PROJECT).xpr: Makefile
 	echo "exit" >> create_project.tcl
 	vivado -nojournal -nolog -mode batch -source create_project.tcl
 
-simulate: $(FPGA_PROJECT).xpr
+simulate: $(FPGA_PROJECT)/$(FPGA_PROJECT).xpr
 	echo "open_project $<" > run_simulation.tcl
 	echo "set_property -name {xsim.simulate.runtime} -value {$(SIM_TIME)} -objects [get_filesets sim_1]" >> run_simulation.tcl
 	echo "launch_simulation" >> run_simulation.tcl
@@ -66,6 +66,6 @@ simulate: $(FPGA_PROJECT).xpr
 
 .PHONY clean:
 clean:
-	rm -rf $(FPGA_PROJECT).xpr
+	rm -rf $(FPGA_PROJECT)
 	rm -rf .Xil *.log *.jou *.cache *.gen *.hw *.ip_user_files *.runs *.sim *.srcs
 	rm -rf create_project.tcl run_simulation.tcl

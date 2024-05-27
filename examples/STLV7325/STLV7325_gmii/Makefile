@@ -25,9 +25,9 @@ FPGA_PART ?= xc7k325tffv676-2
 
 # Files for synthesis
 SRC_FILES = src/rtl/STLV7325_gmii.vhd
-SRC_FILES += ../../../axis_gmii/src/axis_gmii_rx.vhd
-SRC_FILES += ../../../axis_gmii/src/axis_gmii_tx.vhd
-SRC_FILES += ../../../axis_gmii/src/axis_gmii.vhd
+SRC_FILES += ../../../hdl/axis_gmii/axis_gmii_rx.vhd
+SRC_FILES += ../../../hdl/axis_gmii/axis_gmii_tx.vhd
+SRC_FILES += ../../../hdl/axis_gmii/axis_gmii.vhd
 
 # XDC files
 XDC_FILES = src/constr/STLV7325_gmii.xdc
