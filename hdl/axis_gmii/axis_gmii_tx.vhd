@@ -111,7 +111,6 @@ begin
 
     COMB_PROC : process (all) is
     begin
-
         state_next <= state_reg;
 
         reset_crc  <= '0';
@@ -128,7 +127,6 @@ begin
         gmii_tx_er_next <= '0';
 
         case state_reg is
-
             when IDLE =>
                 -- idle state - wait for packet
                 reset_crc <= '1';
@@ -142,7 +140,6 @@ begin
                     gmii_tx_en_next <= '1';
                     state_next      <= PREAMBLE;
                 end if;
-
             when PREAMBLE =>
                 -- send preamble
                 reset_crc <= '1';
@@ -165,7 +162,6 @@ begin
                     gmii_txd_next <= ETH_SFD;
                     state_next    <= PAYLOAD;
                 end if;
-
             when PAYLOAD =>
                 -- send payload
                 update_crc         <= '1';
@@ -192,7 +188,6 @@ begin
 
                     state_next <= WAIT_END;
                 end if;
-
             when LAST =>
                 -- last payload word
                 update_crc <= '1';
@@ -211,7 +206,6 @@ begin
 
                     state_next <= FCS;
                 end if;
-
             when PAD =>
                 -- send padding
                 update_crc <= '1';
@@ -228,7 +222,6 @@ begin
 
                     state_next <= FCS;
                 end if;
-
             when FCS =>
                 -- send FCS
                 frame_ptr_next <= frame_ptr_reg + 1;
@@ -251,7 +244,6 @@ begin
                     frame_ptr_next <= 0;
                     state_next     <= IFG;
                 end if;
-
             when WAIT_END =>
                 -- wait for end of frame
                 frame_ptr_next <= frame_ptr_reg + 1;
@@ -266,7 +258,6 @@ begin
                         state_next <= IDLE;
                     end if;
                 end if;
-
             when IFG =>
                 -- send IFG
                 frame_ptr_next <= frame_ptr_reg + 1;
@@ -274,14 +265,12 @@ begin
                 if (frame_ptr_reg = IFG_DELAY - 1) then
                     state_next <= IDLE;
                 end if;
-
         end case;
 
     end process COMB_PROC;
 
     SEQ_PROC : process (clk) is
     begin
-
         if rising_edge(clk) then
             if (rst = '1') then
                 state_reg <= IDLE;

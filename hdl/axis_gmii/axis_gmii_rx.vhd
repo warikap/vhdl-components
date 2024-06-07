@@ -133,7 +133,6 @@ begin
 
     COMB_PROC : process (all) is
     begin
-
         state_next   <= state_reg;
         pre_cnt_next <= pre_cnt;
 
@@ -150,7 +149,6 @@ begin
         error_bad_fcs_next   <= '0';
 
         case state_reg is
-
             when IDLE =>
                 -- idle state - wait for packet
                 reset_crc <= '1';
@@ -165,7 +163,6 @@ begin
                     start_packet_next <= '1';
                     state_next        <= PAYLOAD;
                 end if;
-
             when PAYLOAD =>
                 -- read payload
                 update_crc <= '1';
@@ -182,6 +179,7 @@ begin
                 elsif (gmii_rx_dv /= '1') then
                     -- end of packet
                     m_axis_tlast_next <= '1';
+
                     -- crc checking
                     if (gmii_rx_er_d0 = '1' or gmii_rx_er_d1 ='1' or gmii_rx_er_d2 = '1' or gmii_rx_er_d3 = '1') then
                         -- error received in FCS bytes
@@ -196,22 +194,20 @@ begin
                         error_bad_frame_next <= '1';
                         error_bad_fcs_next   <= '1';
                     end if;
+
                     state_next <= IDLE;
                 end if;
-
             when WAIT_LAST =>
                 -- wait for end of packet
                 if (gmii_rx_dv /= '1') then
                     state_next <= IDLE;
                 end if;
-
         end case;
 
     end process COMB_PROC;
 
     SEQ_PROC : process (clk) is
     begin
-
         if rising_edge(clk) then
             if (rst = '1') then
                 state_reg <= IDLE;
