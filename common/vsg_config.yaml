@@ -17,6 +17,14 @@ rule:
     style: no_blank_line
   case_201:
     style: no_blank_line
+  subprogram_body_201:
+    style: no_blank_line
+  subprogram_body_202:
+    style: no_blank_line
+  subprogram_body_203:
+    style: no_blank_line
+  subprogram_body_204:
+    style: no_blank_line
   generic_007:
     case: 'upper'
   if_030:
