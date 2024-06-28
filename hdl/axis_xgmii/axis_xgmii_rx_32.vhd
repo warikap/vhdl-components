@@ -293,14 +293,10 @@ begin
     end process SEQ_PROC;
 
     crc_step(crc_state, xgmii_rxd_d0, crc_next);
-    crc_valid(3) <= '1' when crc_next = not x"2144df1c" else
-                    '0';
-    crc_valid(2) <= '1' when crc_next = not x"c622f71d" else
-                    '0';
-    crc_valid(1) <= '1' when crc_next = not x"b1c2a1a3" else
-                    '0';
-    crc_valid(0) <= '1' when crc_next = not x"9d6cdf7e" else
-                    '0';
+    crc_valid(3) <= '1' when crc_next = not x"2144df1c" else '0';
+    crc_valid(2) <= '1' when crc_next = not x"c622f71d" else '0';
+    crc_valid(1) <= '1' when crc_next = not x"b1c2a1a3" else '0';
+    crc_valid(0) <= '1' when crc_next = not x"9d6cdf7e" else '0';
 
     m_axis_tdata  <= m_axis_tdata_reg;
     m_axis_tkeep  <= m_axis_tkeep_reg;

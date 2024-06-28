@@ -9,6 +9,10 @@ rule:
     case: 'upper'
   process_019:
     case: 'upper'
+  generate_005:
+    case: 'upper'
+  generate_012:
+    case: 'upper'
   process_022:
     style: no_blank_line
   case_009:
@@ -27,7 +31,12 @@ rule:
     style: no_blank_line
   generic_007:
     case: 'upper'
+  conditional_waveforms_001:
+    allow_single_line: "yes"
   if_030:
     disable: true    
   if_031:
     disable: true
+  whitespace_011:
+    disable: true
+
