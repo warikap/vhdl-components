@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Marcin Zaremba
+# Copyright (c) 2024 Marcin Zaremba
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,15 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-include ../../../common/uvvm_light.mk
-include ../../../common/questa.mk
+DUT      = uart_rx
+TOPLEVEL = $(DUT)
+MODULE   = $(DUT)_tb
+VHDL_SOURCES += ../../../hdl/uart/$(DUT).vhd
+SIM_BUILD = work
 
-SRC_FILES = ../../src/uart.vhd
-SIM_FILES = uart_tb.vhd
-SIM_TOP = uart_tb
+include ../../../common/cocotb.mk
 
-.PHONY: all
-all: $(UVVM_Light_lib) sim
-
-.PHONY: clean
-clean: clean_UVVM_Light_lib simclean
+STYLE_FILES = $(VHDL_SOURCES)
+include ../../../common/style.mk
